@@ -1,0 +1,1 @@
+SELECT dbo.GetTotalSalary(1) AS TotalSalary

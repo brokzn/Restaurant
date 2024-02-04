@@ -1,0 +1,230 @@
+﻿<Page x:Class="Restaurant.pages.menupage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:effects="clr-namespace:System.Windows.Media.Effects;assembly=PresentationCore"
+      xmlns:local="clr-namespace:Restaurant.pages"
+      mc:Ignorable="d" 
+      Loaded="Page_Loaded"
+      MinHeight="870" MinWidth="1550"
+      Height="auto" Width="auto"
+      Title="Ресторан ''Теремок'' - Главное меню"
+      Background="#2F3037">
+    <Page.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Foreground" Value="#D6D6D6"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Opacity="0.2" Direction="320" ShadowDepth="1" BlurRadius="20"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" CornerRadius="0" Background="#5B5C62" BorderBrush="#6A6B70" BorderThickness="0 0 0 10">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Применяем эффект при наведении на кнопку -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="White" Opacity="0.2" Direction="320" ShadowDepth="6" BlurRadius="67"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="border" Property="BorderBrush" Value="#6A6B70"/>
+                                <Setter TargetName="border" Property="Background" Value="#5B5C62"/>
+                                 </Trigger>
+                            <!-- Сбрасываем эффект при выходе курсора за пределы кнопки 
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Effect" Value="{x:Null}"/> 
+                            </Trigger> -->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Сообщение для пользователя  -->
+        <Label 
+            Name="ToUserMess"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="2"
+                Grid.Column="2"
+                Content="Добрый день, Иван!"
+                Foreground="#D6D6D6"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                FontSize="38"/>
+
+        <Button
+            Style="{StaticResource MenuButtonStyle}"
+             x:Name="MenuMenuItem"
+            Click="MenuMenuItem_Click"
+            Width="460" 
+            Height="120"
+            Grid.Column="1"
+            Grid.Row="3">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        Height="110" 
+                        Width="460">
+                <Image Margin="20 0 0 0" Height="80" 
+                   Width="90" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Source="\Theme\MenuPage\MenuIcon.png">
+                </Image>
+                <TextBlock
+                    Margin="30 0 0 0"
+                    VerticalAlignment="Center" 
+                    Text="Меню ресторана"/>
+            </StackPanel>
+        </Button>
+        <Button  
+            Style="{StaticResource MenuButtonStyle}"
+            Width="460" 
+            Height="120"
+            Grid.Column="1"
+            x:Name="employeesItem"
+            Click="employeesItem_Click"
+            Grid.Row="5">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        Height="110" 
+                        Width="460">
+                <Image Margin="20 0 0 0" Height="80" 
+                   Width="90" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Source="\Theme\MenuPage\EmployeesIcon.png">
+                </Image>
+                <TextBlock
+                    Margin="30 0 0 0"
+                    VerticalAlignment="Center" 
+                    Text="Сотрудники"/>
+            </StackPanel>
+        </Button>
+        <Button  
+            Style="{StaticResource MenuButtonStyle}"
+            x:Name="DeliveryMenuItem"
+            Click="DeliveryMenuItem_Click"
+            Width="460" 
+            Height="120"
+            Grid.Column="2"
+            Grid.Row="3">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        Height="110" 
+                        Width="460">
+                <Image Margin="20 0 0 0" Height="80" 
+                   Width="90" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Source="\Theme\MenuPage\TicketIcon.png">
+                </Image>
+                <TextBlock
+                    Margin="30 0 0 0"
+                    VerticalAlignment="Center" 
+                    Text="Заказы"/>
+            </StackPanel>
+        </Button>
+        <Button  
+            Style="{StaticResource MenuButtonStyle}"
+             x:Name="ticketitem"
+            Click="ticketitem_Click"
+            Width="460" 
+            Height="120"
+            Grid.Column="2"
+            Grid.Row="5">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        Height="110" 
+                        Width="460">
+                <Image Margin="20 0 0 0" Height="80" 
+                   Width="90" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Source="\Theme\MenuPage\PostsIcon.png">
+                </Image>
+                <TextBlock
+                    Margin="30 0 0 0"
+                    VerticalAlignment="Center" 
+                    Text="Должности"/>
+            </StackPanel>
+        </Button>
+        <Button  
+            Style="{StaticResource MenuButtonStyle}"
+            x:Name="StorageMenuItem"
+            Click="StorageMenuItem_Click"
+            Width="460" 
+            Height="120"
+            Grid.Column="3"
+            Grid.Row="3">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        Height="110" 
+                        Width="460">
+                <Image Margin="20 0 0 0" Height="80" 
+                   Width="90" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Source="\Theme\MenuPage\StorageIcon.png">
+                </Image>
+                <TextBlock
+                    Margin="30 0 0 0"
+                    VerticalAlignment="Center" 
+                    Text="Склад"/>
+            </StackPanel>
+        </Button>
+        <Button  
+            Style="{StaticResource MenuButtonStyle}"
+            x:Name="ExitFromMainMenu"
+            Click="ExitFromMainMenu_Click"
+            Width="460" 
+            Height="120"
+            Grid.Column="3"
+            Grid.Row="5">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        Height="110" 
+                        Width="460">
+                <Image Margin="20 0 0 0" Height="80" 
+                   Width="90" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left" 
+                   Source="\Theme\MenuPage\ExitIcon.png">
+                </Image>
+                <TextBlock
+                    Margin="30 0 0 0"
+                    VerticalAlignment="Center" 
+                    Text="Выход"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

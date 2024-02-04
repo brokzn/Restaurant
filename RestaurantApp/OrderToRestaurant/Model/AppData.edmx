@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище RestaurantModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Dish_code" />
+          </Key>
+          <Property Name="Dish_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Food_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ingredient_Code_1" Type="int" Nullable="false" />
+          <Property Name="Ingredient_Amount_1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ingredient_Code_2" Type="int" Nullable="false" />
+          <Property Name="Ingredient_Amount_2" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ingredient_Code_3" Type="int" Nullable="false" />
+          <Property Name="Ingredient_Amount_3" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="Cooking_time" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant_Employees">
+          <Key>
+            <PropertyRef Name="Employee_code" />
+          </Key>
+          <Property Name="Employee_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Middlename" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Age" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Adress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Passport" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Post_Code" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant_Posts">
+          <Key>
+            <PropertyRef Name="Post_Code" />
+          </Key>
+          <Property Name="Post_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Salary" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Responsibilities" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Requirements" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant_Storage">
+          <Key>
+            <PropertyRef Name="Ingredient_Code" />
+          </Key>
+          <Property Name="Ingredient_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ingredient_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date_of_Issue" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Shelf_Life" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="Supplier" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="Ticket_Code" />
+          </Key>
+          <Property Name="Ticket_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ticket_Date" Type="date" Nullable="false" />
+          <Property Name="Ticket_Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Customers_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone_Number" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Dish_code_1" Type="int" Nullable="false" />
+          <Property Name="Dish_code_2" Type="int" Nullable="false" />
+          <Property Name="Dish_code_3" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Delivery_note" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Employee_code" Type="int" Nullable="false" />
+          <Property Name="Completion_Date" Type="date" Nullable="false" />
+          <Property Name="Completion_Time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Menu__Ingredient__0AF29B96">
+          <End Role="Restaurant_Storage" Type="Self.Restaurant_Storage" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Storage">
+              <PropertyRef Name="Ingredient_Code" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Ingredient_Code_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__Ingredient__0BE6BFCF">
+          <End Role="Restaurant_Storage" Type="Self.Restaurant_Storage" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Storage">
+              <PropertyRef Name="Ingredient_Code" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Ingredient_Code_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__Ingredient__0CDAE408">
+          <End Role="Restaurant_Storage" Type="Self.Restaurant_Storage" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Storage">
+              <PropertyRef Name="Ingredient_Code" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Ingredient_Code_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Post___062DE679">
+          <End Role="Restaurant_Posts" Type="Self.Restaurant_Posts" Multiplicity="1" />
+          <End Role="Restaurant_Employees" Type="Self.Restaurant_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Posts">
+              <PropertyRef Name="Post_Code" />
+            </Principal>
+            <Dependent Role="Restaurant_Employees">
+              <PropertyRef Name="Post_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Dish_cod__0FB750B3">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Dish_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Dish_code_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Dish_cod__10AB74EC">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Dish_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Dish_code_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Dish_cod__119F9925">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Dish_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Dish_code_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Employee__1293BD5E">
+          <End Role="Restaurant_Employees" Type="Self.Restaurant_Employees" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Employees">
+              <PropertyRef Name="Employee_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Employee_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище RestaurantModelContainer">
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant_Employees" EntityType="Self.Restaurant_Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant_Posts" EntityType="Self.Restaurant_Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant_Storage" EntityType="Self.Restaurant_Storage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Menu__Ingredient__0AF29B96" Association="Self.FK__Menu__Ingredient__0AF29B96">
+            <End Role="Restaurant_Storage" EntitySet="Restaurant_Storage" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__Ingredient__0BE6BFCF" Association="Self.FK__Menu__Ingredient__0BE6BFCF">
+            <End Role="Restaurant_Storage" EntitySet="Restaurant_Storage" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__Ingredient__0CDAE408" Association="Self.FK__Menu__Ingredient__0CDAE408">
+            <End Role="Restaurant_Storage" EntitySet="Restaurant_Storage" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Post___062DE679" Association="Self.FK__Restauran__Post___062DE679">
+            <End Role="Restaurant_Posts" EntitySet="Restaurant_Posts" />
+            <End Role="Restaurant_Employees" EntitySet="Restaurant_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Dish_cod__0FB750B3" Association="Self.FK__Ticket__Dish_cod__0FB750B3">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Dish_cod__10AB74EC" Association="Self.FK__Ticket__Dish_cod__10AB74EC">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Dish_cod__119F9925" Association="Self.FK__Ticket__Dish_cod__119F9925">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Employee__1293BD5E" Association="Self.FK__Ticket__Employee__1293BD5E">
+            <End Role="Restaurant_Employees" EntitySet="Restaurant_Employees" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Dish_code" />
+          </Key>
+          <Property Name="Dish_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Food_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ingredient_Code_1" Type="Int32" Nullable="false" />
+          <Property Name="Ingredient_Amount_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ingredient_Code_2" Type="Int32" Nullable="false" />
+          <Property Name="Ingredient_Amount_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ingredient_Code_3" Type="Int32" Nullable="false" />
+          <Property Name="Ingredient_Amount_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="Cooking_time" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Restaurant_Storage" Relationship="Self.FK__Menu__Ingredient__0AF29B96" FromRole="Menu" ToRole="Restaurant_Storage" />
+          <NavigationProperty Name="Restaurant_Storage1" Relationship="Self.FK__Menu__Ingredient__0BE6BFCF" FromRole="Menu" ToRole="Restaurant_Storage" />
+          <NavigationProperty Name="Restaurant_Storage2" Relationship="Self.FK__Menu__Ingredient__0CDAE408" FromRole="Menu" ToRole="Restaurant_Storage" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK__Ticket__Dish_cod__0FB750B3" FromRole="Menu" ToRole="Ticket" />
+          <NavigationProperty Name="Ticket1" Relationship="Self.FK__Ticket__Dish_cod__10AB74EC" FromRole="Menu" ToRole="Ticket" />
+          <NavigationProperty Name="Ticket2" Relationship="Self.FK__Ticket__Dish_cod__119F9925" FromRole="Menu" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Restaurant_Employees">
+          <Key>
+            <PropertyRef Name="Employee_code" />
+          </Key>
+          <Property Name="Employee_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middlename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Age" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Passport" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Post_Code" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Restaurant_Posts" Relationship="Self.FK__Restauran__Post___062DE679" FromRole="Restaurant_Employees" ToRole="Restaurant_Posts" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK__Ticket__Employee__1293BD5E" FromRole="Restaurant_Employees" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Restaurant_Posts">
+          <Key>
+            <PropertyRef Name="Post_Code" />
+          </Key>
+          <Property Name="Post_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salary" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Responsibilities" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Requirements" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Restaurant_Employees" Relationship="Self.FK__Restauran__Post___062DE679" FromRole="Restaurant_Posts" ToRole="Restaurant_Employees" />
+        </EntityType>
+        <EntityType Name="Restaurant_Storage">
+          <Key>
+            <PropertyRef Name="Ingredient_Code" />
+          </Key>
+          <Property Name="Ingredient_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ingredient_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_of_Issue" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Shelf_Life" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="Supplier" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__Menu__Ingredient__0AF29B96" FromRole="Restaurant_Storage" ToRole="Menu" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK__Menu__Ingredient__0BE6BFCF" FromRole="Restaurant_Storage" ToRole="Menu" />
+          <NavigationProperty Name="Menu2" Relationship="Self.FK__Menu__Ingredient__0CDAE408" FromRole="Restaurant_Storage" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="Ticket_Code" />
+          </Key>
+          <Property Name="Ticket_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ticket_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ticket_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Customers_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_Number" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dish_code_1" Type="Int32" Nullable="false" />
+          <Property Name="Dish_code_2" Type="Int32" Nullable="false" />
+          <Property Name="Dish_code_3" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Delivery_note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Employee_code" Type="Int32" Nullable="false" />
+          <Property Name="Completion_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Completion_Time" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK__Ticket__Dish_cod__0FB750B3" FromRole="Ticket" ToRole="Menu" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK__Ticket__Dish_cod__10AB74EC" FromRole="Ticket" ToRole="Menu" />
+          <NavigationProperty Name="Menu2" Relationship="Self.FK__Ticket__Dish_cod__119F9925" FromRole="Ticket" ToRole="Menu" />
+          <NavigationProperty Name="Restaurant_Employees" Relationship="Self.FK__Ticket__Employee__1293BD5E" FromRole="Ticket" ToRole="Restaurant_Employees" />
+        </EntityType>
+        <Association Name="FK__Menu__Ingredient__0AF29B96">
+          <End Role="Restaurant_Storage" Type="Self.Restaurant_Storage" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Storage">
+              <PropertyRef Name="Ingredient_Code" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Ingredient_Code_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__Ingredient__0BE6BFCF">
+          <End Role="Restaurant_Storage" Type="Self.Restaurant_Storage" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Storage">
+              <PropertyRef Name="Ingredient_Code" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Ingredient_Code_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Menu__Ingredient__0CDAE408">
+          <End Role="Restaurant_Storage" Type="Self.Restaurant_Storage" Multiplicity="1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Storage">
+              <PropertyRef Name="Ingredient_Code" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="Ingredient_Code_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Dish_cod__0FB750B3">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Dish_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Dish_code_1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Dish_cod__10AB74EC">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Dish_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Dish_code_2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Dish_cod__119F9925">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Dish_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Dish_code_3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Restauran__Post___062DE679">
+          <End Role="Restaurant_Posts" Type="Self.Restaurant_Posts" Multiplicity="1" />
+          <End Role="Restaurant_Employees" Type="Self.Restaurant_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Posts">
+              <PropertyRef Name="Post_Code" />
+            </Principal>
+            <Dependent Role="Restaurant_Employees">
+              <PropertyRef Name="Post_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ticket__Employee__1293BD5E">
+          <End Role="Restaurant_Employees" Type="Self.Restaurant_Employees" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant_Employees">
+              <PropertyRef Name="Employee_code" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="Employee_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Restaurant_Employees" EntityType="Self.Restaurant_Employees" />
+          <EntitySet Name="Restaurant_Posts" EntityType="Self.Restaurant_Posts" />
+          <EntitySet Name="Restaurant_Storage" EntityType="Self.Restaurant_Storage" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" />
+          <AssociationSet Name="FK__Menu__Ingredient__0AF29B96" Association="Self.FK__Menu__Ingredient__0AF29B96">
+            <End Role="Restaurant_Storage" EntitySet="Restaurant_Storage" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__Ingredient__0BE6BFCF" Association="Self.FK__Menu__Ingredient__0BE6BFCF">
+            <End Role="Restaurant_Storage" EntitySet="Restaurant_Storage" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Menu__Ingredient__0CDAE408" Association="Self.FK__Menu__Ingredient__0CDAE408">
+            <End Role="Restaurant_Storage" EntitySet="Restaurant_Storage" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Dish_cod__0FB750B3" Association="Self.FK__Ticket__Dish_cod__0FB750B3">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Dish_cod__10AB74EC" Association="Self.FK__Ticket__Dish_cod__10AB74EC">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Dish_cod__119F9925" Association="Self.FK__Ticket__Dish_cod__119F9925">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Restauran__Post___062DE679" Association="Self.FK__Restauran__Post___062DE679">
+            <End Role="Restaurant_Posts" EntitySet="Restaurant_Posts" />
+            <End Role="Restaurant_Employees" EntitySet="Restaurant_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ticket__Employee__1293BD5E" Association="Self.FK__Ticket__Employee__1293BD5E">
+            <End Role="Restaurant_Employees" EntitySet="Restaurant_Employees" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище RestaurantModelContainer" CdmEntityContainer="RestaurantEntities">
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="RestaurantModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Dish_code" ColumnName="Dish_code" />
+                <ScalarProperty Name="Food_Name" ColumnName="Food_Name" />
+                <ScalarProperty Name="Ingredient_Code_1" ColumnName="Ingredient_Code_1" />
+                <ScalarProperty Name="Ingredient_Amount_1" ColumnName="Ingredient_Amount_1" />
+                <ScalarProperty Name="Ingredient_Code_2" ColumnName="Ingredient_Code_2" />
+                <ScalarProperty Name="Ingredient_Amount_2" ColumnName="Ingredient_Amount_2" />
+                <ScalarProperty Name="Ingredient_Code_3" ColumnName="Ingredient_Code_3" />
+                <ScalarProperty Name="Ingredient_Amount_3" ColumnName="Ingredient_Amount_3" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Cooking_time" ColumnName="Cooking_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurant_Employees">
+            <EntityTypeMapping TypeName="RestaurantModel.Restaurant_Employees">
+              <MappingFragment StoreEntitySet="Restaurant_Employees">
+                <ScalarProperty Name="Employee_code" ColumnName="Employee_code" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="Post_Code" ColumnName="Post_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurant_Posts">
+            <EntityTypeMapping TypeName="RestaurantModel.Restaurant_Posts">
+              <MappingFragment StoreEntitySet="Restaurant_Posts">
+                <ScalarProperty Name="Post_Code" ColumnName="Post_Code" />
+                <ScalarProperty Name="Post_Name" ColumnName="Post_Name" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Responsibilities" ColumnName="Responsibilities" />
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurant_Storage">
+            <EntityTypeMapping TypeName="RestaurantModel.Restaurant_Storage">
+              <MappingFragment StoreEntitySet="Restaurant_Storage">
+                <ScalarProperty Name="Ingredient_Code" ColumnName="Ingredient_Code" />
+                <ScalarProperty Name="Ingredient_Name" ColumnName="Ingredient_Name" />
+                <ScalarProperty Name="Date_of_Issue" ColumnName="Date_of_Issue" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Shelf_Life" ColumnName="Shelf_Life" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket">
+            <EntityTypeMapping TypeName="RestaurantModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="Ticket_Code" ColumnName="Ticket_Code" />
+                <ScalarProperty Name="Ticket_Date" ColumnName="Ticket_Date" />
+                <ScalarProperty Name="Ticket_Time" ColumnName="Ticket_Time" />
+                <ScalarProperty Name="Customers_Name" ColumnName="Customers_Name" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Dish_code_1" ColumnName="Dish_code_1" />
+                <ScalarProperty Name="Dish_code_2" ColumnName="Dish_code_2" />
+                <ScalarProperty Name="Dish_code_3" ColumnName="Dish_code_3" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Delivery_note" ColumnName="Delivery_note" />
+                <ScalarProperty Name="Employee_code" ColumnName="Employee_code" />
+                <ScalarProperty Name="Completion_Date" ColumnName="Completion_Date" />
+                <ScalarProperty Name="Completion_Time" ColumnName="Completion_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

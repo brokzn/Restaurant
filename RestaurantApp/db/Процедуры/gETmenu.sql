@@ -1,0 +1,5 @@
+CREATE PROCEDURE GetMenu
+AS
+BEGIN
+    SELECT * FROM dbo.Menu
+END

@@ -1,0 +1,245 @@
+﻿<Page x:Class="Restaurant.pages.postspage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Restaurant.pages"
+      mc:Ignorable="d" 
+        MinHeight="870" MinWidth="1550"
+     Height="auto" Width="auto"
+      Loaded="Page_Loaded"
+      Title="Ресторан ''Теремок'' - Должности"
+      Background="#4B4C52">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30">
+            </RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#1C1C21"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Background="#393A41"/>
+            <Border Grid.Column="1" Background="#2F3037"/>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Grid.Row="0" Background="#393A41" Opacity="0.7"/>
+                <Border Grid.Column="1" Grid.Row="0" Background="#393A41" Opacity="0.7"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image  
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="0" 
+                            Grid.Row="1"  
+                            Width="20" 
+                            Height="20"       
+                            Source="\pages\elements\zoom-out.png">
+
+                    </Image>
+                    <Image  
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Grid.Column="1" 
+                            Grid.Row="0"  
+                            Width="9" 
+                            Height="9"       
+                            Source="\pages\elements\pyramid.png">
+
+                    </Image>
+                    <Image  
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Grid.Column="2" 
+                            Grid.Row="1"  
+                            Width="20" 
+                            Height="20"
+                            Source="\pages\elements\zoom-in.png">
+
+                    </Image>
+                    <Slider Name="FontSizeSlider"
+                        Style="{StaticResource Horizontal_Slider}"
+                            Grid.Column="1" 
+                            Grid.Row="1"
+                            Width="110" 
+                            Maximum="18"
+                            Minimum="10"
+                            Value="14"
+                            TickFrequency="2"
+                            VerticalAlignment="Center">
+
+                    </Slider>
+                </Grid>
+                <Label 
+                   Margin="10 4 0 0"
+                   Name="RowCountLabel"
+                   Content="Всего должностей:" 
+                   Grid.Row="1" Grid.Column="0"
+                   FontSize="18" Foreground="White"
+                   FontFamily="arial" FontWeight="Bold"
+                   />
+                <Label 
+                   Margin="185 5 0 0"
+                   Name="RowCount"
+                   Content="0000" 
+                    Grid.Column="0"
+                   FontSize="18" Foreground="White"
+                   FontFamily="arial" FontWeight="Bold"
+                   />
+            </Grid>
+
+            <DataGrid x:Name="DataGridPosts" 
+                  Style="{StaticResource CustomDataDridStyle}"
+                  Background="Transparent"
+                  Grid.Column="1"
+                  Width="auto" 
+                  Height="700" 
+                  Margin="80 0 80 0"
+                  VerticalAlignment="Center"
+                  BorderThickness="0">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn  CanUserResize="False" Width="150" Header="Название" Binding="{Binding Post_Name}"/>
+                    <DataGridTextColumn  CanUserResize="False" Width="150" Header="Зарплата" Binding="{Binding Salary}" />
+                    <DataGridTextColumn  CanUserResize="False" Width="*" Header="Задачи" Binding="{Binding Responsibilities}"/>
+                    <DataGridTextColumn  CanUserResize="False" Width="*" Header="Навыки" Binding="{Binding Requirements}"/>
+
+                    <DataGridTemplateColumn Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="EditRowToolButton"
+                                    Click="EditRowToolButton_Click"
+                                    Background="Transparent"
+                                    Style="{StaticResource DGRorange}"
+                                    Width="30" Height="30">
+                                    <Image 
+                                           Width="20" Height="20"
+                                    Source="\pages\elements\datarowedit.png">
+
+                                    </Image>
+                                </Button>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="DeleteRowToolButton"
+                                    Click="DeleteRowToolButton_Click"
+                                    Background="Transparent"
+                                    Width="30" Height="30"
+                                        Style="{StaticResource DGRred}">
+                                    <Image Width="20" Height="20"
+                                     Source="\pages\elements\datarowdelete.png">
+
+                                    </Image>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="1"
+                        Name="AddRowDataGridStorage"
+                        Click="AddRowDataGridStorage_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Добавить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <Button Visibility="Hidden" Grid.Row="1"
+                        Name="EditRowDataGridStorage"
+                        
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Изменить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <Button Grid.Row="2"
+                        x:Name="DeleteRowDataGridStorage"
+                        Click="DeleteRowDataGridStorage_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Удалить" Style="{StaticResource ToolButtonLabel}"/>
+
+                </Button>
+                <Button Grid.Row="3"
+                        x:Name="UpdateDataGrid"
+                        Click="UpdateDataGrid_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Обновить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+
+                <TextBox
+                    Name="DataFilter"
+                    Padding="10 11 0 0" 
+                         Width="160" 
+                         Height="40" 
+                         HorizontalAlignment="Left" 
+                         Margin="20 0 0 0" 
+                         Style="{StaticResource TextBox2Style}">
+
+                </TextBox>
+                <Button
+                    Name="SearchDataGrid"
+                    Click="SearchDataGrid_Click"
+                    Style="{StaticResource DataGridSearch}"
+                    Height="40" HorizontalAlignment="Right" Width="40" Margin="0 0 30 0">
+                    <Image Width="20" Height="20"
+                                     Source="\Theme\Elements\search.png">
+
+                    </Image>
+                </Button>
+            </Grid>
+        </Grid>
+        <!-- Кнопка возвращения в "Главное меню"  -->
+        <Button 
+            Panel.ZIndex="1"
+            Width="34" 
+            Height="24"
+            Grid.Row="1"
+            Background="Transparent"
+            Margin="20 0 0 0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left" 
+            Style="{StaticResource MenuRotateBackButton}"
+            x:Name="RotateMainMenuButton"
+            Click="RotateMainMenuButton_Click">
+            <Image Width="20" Height="20"
+                                     Source="\Theme\Elements\RotateIcon.png">
+
+            </Image>
+        </Button>
+
+    </Grid>
+</Page>

@@ -1,0 +1,102 @@
+﻿<Window x:Class="OrderToRestaurant.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrderToRestaurant"
+   Title="Ресторан Теремок" Height="600" Width="600" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        MinHeight="700" MinWidth="700"
+        ResizeMode="NoResize"  AllowsTransparency="True"
+        Background="#2F3037"
+        Icon="\Theme\NewDark\Brand\logo.ico">
+    <!-- Основная сетка приложения  -->
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition>
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Фигура для перемещения окна  -->
+        <Rectangle Panel.ZIndex="1" 
+                   Width="2000" 
+                   Height="30" 
+                   Fill="#1C1C21" 
+                   VerticalAlignment="Top"  
+                   HorizontalAlignment="Left"
+                   MouseDown="Rectangle_MouseDown">
+        </Rectangle>
+        <!-- Логотип  -->
+        <Image 
+            Margin="15 5 0 0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Width="20" Height="20"
+            Panel.ZIndex="1" 
+            Source="\Theme\NewDark\Brand\logo.png">
+        </Image>
+        <Label 
+            Name="WinInfoLabel"
+            Width="260"
+            Height="25"
+            Panel.ZIndex="1" 
+            Margin="40 3 0 0"
+            Content="Ресторан ''Теремок'' - Заказ на дом "
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left" 
+            Foreground="#D6D6D6"
+            FontFamily="Arial"
+            FontWeight="Bold"
+            FontSize="12"
+            IsEnabled="False"
+            />
+
+        <!-- Кнопка закрытия приложения  -->
+        <Button Margin="0 0 0 0" 
+                Height="30" 
+                Width="40" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Panel.ZIndex="2"  
+                BorderThickness="0"
+                Background="Transparent"
+                x:Name="СloseAppButton"
+                Click="СloseAppButton_Click"
+                Style="{StaticResource CloseAppButton}"
+                
+                >
+            <StackPanel>
+                <Image Source="\Theme\NewDark\WindowTools\closeApp.png" Margin="0 0 0 0" Width="11" Height="11">
+
+                </Image>
+            </StackPanel>
+        </Button>
+        <!-- Кнопка сворачивания приложения  -->
+        <Button Margin="0 0 40 0" 
+                Height="30" Width="40" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Panel.ZIndex="2" 
+                Background="Transparent" 
+                BorderThickness="0"
+                x:Name="TrayAppButton"
+                Click="TrayAppButton_Click"
+                Style="{StaticResource TrayAppButton}"
+                
+                >
+            <StackPanel>
+                <Image Source="\Theme\NewDark\WindowTools\trayApp.png" Margin="0 0 0 0" Width="11" Height="11">
+
+                </Image>
+            </StackPanel>
+        </Button>
+      
+
+
+
+        <!-- Рамка вывода страниц  -->
+        <Frame VerticalAlignment="Center" x:Name="mainframe" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="mainframe_Navigated"  Height="600" Width="600"/>
+    </Grid>
+
+</Window>

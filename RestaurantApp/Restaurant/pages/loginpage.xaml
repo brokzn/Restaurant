@@ -1,0 +1,191 @@
+﻿<Page x:Class="Restaurant.pages.loginpage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Restaurant" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml"
+      mc:Ignorable="d"
+      MinHeight="870" MinWidth="1550"
+      Height="auto" Width="auto"
+      Title="Ресторан ''Теремок'' - Авторизация">
+    <Page.Resources>
+        <Style TargetType="Label" x:Key="ShadowLabel">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="67" Color="Black"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="PBCustom" TargetType="ProgressBar">
+            <Setter Property="Background" Value="#AAAAAA"/>
+            <Setter Property="Foreground" Value="#518EBA"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <!-- Сетка приложения  -->
+        <Grid Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!-- Фон блока авторизации  -->
+            <Border 
+                Grid.Column="0" 
+                Grid.Row="1"  
+                Background="#393A41"/>
+            <Border 
+                Grid.Column="1" 
+                Grid.Row="1"  
+                Background="#2F3037"/>
+            <!-- Приветственное сообщение  -->
+            <Label 
+                Style="{StaticResource ShadowLabel}"
+                Margin="0 0 0 450"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="1"
+                Content="Добро пожаловать!"
+                Foreground="#D6D6D6"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                FontSize="42"/>
+            <!-- Картинка  -->
+            <Image 
+                Width="400"
+                Height="400"
+                Grid.Column="1"
+                Source="\Theme\Images\restaurant.png">
+                
+            </Image>
+            
+            <Grid  Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                
+
+
+                <!--Подпись Поле Имя  -->
+                <Label 
+                Margin="30 10 0 0"
+                Grid.Row="2"
+                Content="Имя"
+                Foreground="#D6D6D6"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                FontSize="16"/>
+                <!--Подпись Поле Фамилия  -->
+                <Label  
+                Margin="30 10 0 0"
+                Grid.Row="3"
+                Content="Фамилия"
+                Foreground="#D6D6D6"
+                FontFamily="Arial"
+                FontWeight="Bold"
+                FontSize="16"/>
+                <ProgressBar
+                   Style="{StaticResource PBCustom}"
+                    x:Name="loadingIndicator" 
+                              Grid.Row="8" 
+                              Height="5" 
+                              VerticalAlignment="Bottom"   
+                              IsIndeterminate="True" 
+                              Visibility="Hidden"></ProgressBar>
+                <!-- Поле Имя  -->
+                <TextBox 
+                 Style="{StaticResource TextBoxGlobalStyle}"   
+                 Grid.Row="2"
+                 VerticalAlignment="Bottom" 
+                 HorizontalAlignment="Center"
+                 Width="280" 
+                 Height="45"
+                 Loaded="LoginTB_Loaded"
+                 x:Name="LoginTB">
+                  
+                </TextBox>
+                <!-- Поле Фамилия  -->
+                <TextBox 
+                 Style="{StaticResource TextBoxGlobalStyle}" 
+                 Grid.Row="3"
+                 VerticalAlignment="Bottom" 
+                 HorizontalAlignment="Center"
+                 Width="280" 
+                 Height="45"
+                 Loaded="PassTextBox_Loaded"
+                 x:Name="PassTextBox">
+                </TextBox>
+                <!-- Сообщение об ошибке входа  -->
+                <Rectangle 
+                     Grid.Row="5"
+                Fill="#FFC3C3" 
+                StrokeThickness="2" 
+                Stroke="#8E2525"
+                Width="280" 
+                Height="45" 
+                RadiusX="0" 
+                RadiusY="0"
+                x:Name="ErrorBodyRectangle"
+                Visibility="Hidden"/>
+                <Label 
+                     Grid.Row="5"
+               Content="Аккаунт не найден." 
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontFamily="Arial"
+               FontSize="14"
+               FontWeight="Bold"
+               Foreground="#FF0000"
+               Name="ErrorMessageAuthLabel"
+               Visibility="Hidden"/>
+                <!-- Кнопка входа  -->
+                <Button 
+                Style="{StaticResource BluebuttonStyle}"    
+                Grid.Row="4"
+                Height="45" 
+                Width="140" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Content="Войти"
+                Click="LoginButton_Click"
+                IsEnabled="True"
+                Name="LoginButton">
+                </Button>
+                <TextBlock 
+                       Style="{StaticResource RegLabelStyle}"
+                       Text="Регистрация"
+                       Visibility="Hidden"
+                       Grid.Row="7" 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="0 0 115 0"
+                       MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
+                       />
+                <Label Content="нового аккаунта." 
+                       Grid.Row="7" 
+                       Visibility="Hidden"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="arial"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Foreground="#D6D6D6"
+                       Margin="110 0 0 0"
+                       />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,417 @@
+﻿<Page x:Class="Restaurant.pages.foodmenupage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Restaurant.pages"
+      mc:Ignorable="d" 
+      Height="auto" Width="auto"
+        MinHeight="870" MinWidth="1550"
+      Loaded="Page_Loaded"
+      Title="Ресторан ''Теремок'' - Меню ресторана"
+      Background="#4B4C52">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="1" Background="#4B4C52"/>
+        <Grid Grid.Row="2" Name="DescHide">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition/>
+                <ColumnDefinition  Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Background="#393A41">
+                
+            </Border>
+            <Border Grid.ColumnSpan="2" Grid.Column="1" Background="#2F3037"/>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Grid.Row="0" Background="#393A41" Opacity="0.7"/>
+                <Border Grid.Column="1" Grid.Row="0" Background="#393A41" Opacity="0.7"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image  
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="0" 
+                            Grid.Row="1"  
+                            Width="20" 
+                            Height="20"       
+                            Source="\pages\elements\zoom-out.png">
+
+                    </Image>
+                    <Image  
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Grid.Column="1" 
+                            Grid.Row="0"  
+                            Width="9" 
+                            Height="9"       
+                            Source="\pages\elements\pyramid.png">
+
+                    </Image>
+                    <Image  
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Grid.Column="2" 
+                            Grid.Row="1"  
+                            Width="20" 
+                            Height="20"
+                            Source="\pages\elements\zoom-in.png">
+
+                    </Image>
+                    <Slider Name="FontSizeSlider"
+                        Style="{StaticResource Horizontal_Slider}"
+                            Grid.Column="1" 
+                            Grid.Row="1"
+                            Width="110" 
+                            Maximum="18"
+                            Minimum="10"
+                            Value="14"
+                            TickFrequency="2"
+                            VerticalAlignment="Center">
+
+                    </Slider>
+                </Grid>
+
+
+
+                <Label 
+                   Margin="10 4 0 0"
+                   Name="RowCountLabel"
+                   Content="Всего блюд:" 
+                   Grid.Row="1" Grid.Column="0"
+                   FontSize="18" Foreground="#D6D6D6"
+                   FontFamily="arial" FontWeight="Bold"
+                   />
+                <Label 
+                   Margin="125 5 0 0"
+                   Name="RowCount"
+                   Content="000" 
+                   Grid.Column="0"
+                   FontSize="18" Foreground="#D6D6D6"
+                   FontFamily="arial" FontWeight="Bold"
+                   />
+            </Grid>
+
+            <DataGrid x:Name="DataGridMenu" 
+                  Style="{StaticResource CustomDataDridStyle}"
+                      
+                  Background="Transparent"
+                  Grid.Column="1"
+                  Width="auto" 
+                      SelectionChanged="DataGridMenu_SelectionChanged"
+                  Height="700" 
+                      Margin="80 0 80 0"
+                      HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  BorderThickness="0">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn   CanUserResize="False" Width="*" Header="Название блюда" Binding="{Binding Food_Name}"/>
+                    <DataGridTextColumn    CanUserResize="False" Width="*" Header="Цена" Binding="{Binding Cost}"/>
+                    <DataGridTemplateColumn   Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="InfoRowToolButton"
+                                    Click="InfoRowToolButton_Click"
+                                    Background="Transparent"
+                                    Style="{StaticResource DGRblue}"
+                                    Width="30" Height="30">
+                                    <Image 
+                                           Width="20" Height="20"
+                                    Source="\pages\elements\information.png">
+
+                                    </Image>
+                                </Button>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn   Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="EditRowToolButton"
+                                    Click="EditRowToolButton_Click"
+                                    Background="Transparent"
+                                    Style="{StaticResource DGRorange}"
+                                    Width="30" Height="30">
+                                    <Image 
+                                           Width="20" Height="20"
+                                    Source="\pages\elements\datarowedit.png">
+
+                                    </Image>
+                                </Button>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn  Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="DeleteRowToolButton"
+                                    Click="DeleteRowToolButton_Click"
+                                    Background="Transparent"
+                                    Width="30" Height="30"
+                                        Style="{StaticResource DGRred}">
+                                    <Image Width="20" Height="20"
+                                     Source="\pages\elements\datarowdelete.png">
+
+                                    </Image>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+            <Border Grid.Column="2" Grid.Row="1" Background="#393A41" Opacity="0.7"/>
+
+
+
+            <Grid x:Name="FoodDescription" Visibility="Hidden" Grid.Column="2" Background="#393A41">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="220"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="0" BorderThickness="0.8" BorderBrush="White" Grid.Column="1" Grid.Row="1" Background="#6A6B70" />
+                <Image Visibility="Hidden"
+                    x:Name="ImageFoodDesc"
+                    Grid.Row="1" 
+                       Grid.Column="1"  
+                       Source="\img\BeefPick.png"
+                       VerticalAlignment="Top"
+                       Margin="0 20 0 0"
+                       Width="270">
+                </Image>
+
+                <Button 
+                Margin="0 0 0 0" 
+                Height="24" 
+                Width="35" 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Panel.ZIndex="2"  
+                BorderThickness="0"
+                Background="Transparent"
+                x:Name="СloseDescriptionButton"
+                Click="СloseDescriptionButton_Click"
+                Style="{StaticResource CloseAppButton}">
+                    <StackPanel>
+                        <Image Source="\Theme\NewDark\WindowTools\closeApp.png" Margin="0 0 0 0" Width="11" Height="11">
+
+                        </Image>
+                    </StackPanel>
+                </Button>
+
+                <Label x:Name="MenuNameLabel"
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" Grid.Column="1" 
+                       Margin="10 0 0 50" Content="Стейк с говядиной" 
+                       VerticalAlignment="Top"/>
+                <Label x:Name="MenuCTLabel"
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       Margin="10 30 0 30"
+                       VerticalAlignment="top"
+                       Content="Время приготовления: "/>
+
+                <Label x:Name="MenuCostLabel"
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       Margin="10 60 0 10"
+                       VerticalAlignment="Top"
+                       Content="Цена: 500р."/>
+
+                <Label 
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       Margin="10 90 0 10"
+                       VerticalAlignment="Top"
+                       Content="Состав:"/>
+
+                <Label x:Name="Ing1Label"
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       Margin="10 120 0 10"
+                       VerticalAlignment="Top"
+                       Content="Лук"/>
+                <Label x:Name="Ing2Label"
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       Margin="10 150 0 10"
+                       VerticalAlignment="Top"
+                       Content="Чеснок"/>
+                <Label x:Name="Ing3Label"
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       Margin="10 180 0 10"
+                       VerticalAlignment="Top"
+                       Content="Помидоры"/>
+
+
+            </Grid>
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+            
+                <Button Grid.Row="1"
+                        Name="AddRowDataGridStorage"
+                        Click="AddRowDataGridStorage_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Добавить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <Button Grid.Row="2"
+                        x:Name="DeleteRowDataGridStorage"
+                        Click="DeleteRowDataGridStorage_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Удалить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <Button Grid.Row="3"
+                        x:Name="UpdateDataGrid"
+                        Click="UpdateDataGrid_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Обновить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <TextBox
+                    Name="DataFilter"
+                    Padding="10 11 0 0" 
+                         Width="160" 
+                         Height="40" 
+                         HorizontalAlignment="Left" 
+                         Margin="20 0 0 0" 
+                         Style="{StaticResource TextBox2Style}">
+
+                </TextBox>
+                <Button
+                    Name="SearchDataGrid"
+                    Click="SearchDataGrid_Click"
+                    Style="{StaticResource DataGridSearch}"
+                    Height="40" HorizontalAlignment="Right" Width="40" Margin="0 0 30 0">
+                    <Image Width="20" Height="20"
+                                     Source="\Theme\Elements\search.png">
+
+                    </Image>
+                </Button>
+
+                <Button Grid.Row="4"
+                        x:Name="CostFilterDataGrid"
+                        Click="CostFilterDataGrid_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Grid Height="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Name="CostPopUpIcon" Grid.Column="1" Source="\Theme\Elements\arrow.png" Width="20" Height="20"/>
+                        <Label Height="35" Grid.Column="0" HorizontalAlignment="Center" Content="Цена" Style="{StaticResource FilterLabel}"/>
+                    </Grid>
+                </Button>
+
+                <Grid x:Name="FilterSettings" Grid.Row="5" Background="Transparent"  Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" x:Name="FromToTextbox" Background="Transparent">
+                        <TextBox PreviewTextInput="TextBox_PreviewTextInput" TextChanged="CostFromTB_TextChanged"  x:Name="CostFromTB" Style="{StaticResource CostFilterTBStyle}" Width="80" Margin="0 0 100 0" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBox PreviewTextInput="TextBox_PreviewTextInput" TextChanged="CostToTB_TextChanged"  x:Name="CostToTB"  Style="{StaticResource CostFilterTBStyle}" Width="80" Margin="100 0 0 0" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Row="1" x:Name="CostCheckBoxes" Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="30"/>
+                            <RowDefinition  Height="30"/>
+                            <RowDefinition  Height="30"/>
+                            <RowDefinition  Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox IsChecked="False" IsEnabled="True" x:Name="FirstCostRadiusCB" Checked="FirstCostRadiusCB_Checked" Style="{StaticResource CheckBoxFilterStyel}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        <CheckBox IsChecked="False" IsEnabled="True" x:Name="SecondCostRadiusCB" Checked="SecondCostRadiusCB_Checked" Style="{StaticResource CheckBoxFilterStyel}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <CheckBox IsChecked="False" IsEnabled="True" x:Name="ThirdCostRadiusCB" Checked="ThirdCostRadiusCB_Checked" Style="{StaticResource CheckBoxFilterStyel}"   Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <CheckBox IsChecked="False" IsEnabled="True" x:Name="FourCostRadiusCB" Checked="FourCostRadiusCB_Checked" Style="{StaticResource CheckBoxFilterStyel}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label  Foreground="#D6D6D6" FontFamily="Arial" FontWeight="Bold" FontSize="16" Content="Менее 500 ₽" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Label  Foreground="#D6D6D6" FontFamily="Arial" FontWeight="Bold" FontSize="16" Content="500-1000 ₽" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Label  Foreground="#D6D6D6" FontFamily="Arial" FontWeight="Bold" FontSize="16" Content="1000-1500 ₽" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <Label  Foreground="#D6D6D6" FontFamily="Arial" FontWeight="Bold" FontSize="16" Content="1500-2000 ₽" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        
+                    </Grid>
+                </Grid>
+                    
+            </Grid>
+        </Grid>
+
+        <!-- Кнопка возвращения в "Главное меню"  -->
+        <Button 
+            Panel.ZIndex="1"
+            Width="34" 
+            Height="24"
+            Grid.Row="1"
+            Background="Transparent"
+            Margin="20 0 0 0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left" 
+            Style="{StaticResource MenuRotateBackButton}"
+            x:Name="RotateMainMenuButton"
+            Click="RotateMainMenuButton_Click">
+            <Image Width="20" Height="20"
+                                     Source="\Theme\Elements\RotateIcon.png">
+
+            </Image>
+        </Button>
+    </Grid>
+</Page>

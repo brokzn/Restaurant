@@ -1,0 +1,386 @@
+﻿<Page x:Class="Restaurant.pages.employeespage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Restaurant.pages"
+      mc:Ignorable="d" 
+        MinHeight="870" MinWidth="1550"
+      Height="AUTO" Width="AUTO"
+      Loaded="Page_Loaded"
+      Title="Ресторан ''Теремок'' - Сотрудники"
+      Background="#4B4C52">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30">
+            </RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#1C1C21"/>
+        <Grid Grid.Row="2" Name="DescHide">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition/>
+                <ColumnDefinition   Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Background="#393A41"/>
+            <Border Grid.ColumnSpan="2" Grid.Column="1" Background="#2F3037"/>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Grid.Row="0" Background="#393A41" Opacity="0.7"/>
+                <Border Grid.Column="1" Grid.Row="0" Background="#393A41" Opacity="0.7"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image  
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="0" 
+                            Grid.Row="1"  
+                            Width="20" 
+                            Height="20"       
+                            Source="\pages\elements\zoom-out.png">
+
+                    </Image>
+                    <Image  
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Grid.Column="1" 
+                            Grid.Row="0"  
+                            Width="9" 
+                            Height="9"       
+                            Source="\pages\elements\pyramid.png">
+
+                    </Image>
+                    <Image  
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Grid.Column="2" 
+                            Grid.Row="1"  
+                            Width="20" 
+                            Height="20"
+                            Source="\pages\elements\zoom-in.png">
+
+                    </Image>
+                    <Slider Name="FontSizeSlider"
+                        Style="{StaticResource Horizontal_Slider}"
+                            Grid.Column="1" 
+                            Grid.Row="1"
+                            Width="110" 
+                            Maximum="18"
+                            Minimum="10"
+                            Value="14"
+                            TickFrequency="2"
+                            VerticalAlignment="Center">
+
+                    </Slider>
+                </Grid>
+
+
+
+                <Label 
+                   Margin="10 4 0 0"
+                   Name="RowCountLabel"
+                   Content="Всего сотрудников:" 
+                   Grid.Row="1" Grid.Column="0"
+                   FontSize="18" Foreground="#D9D9D9"
+                   FontFamily="arial" FontWeight="Bold"
+                   />
+                <Label 
+                   Margin="190 5 0 0"
+                   Name="RowCount"
+                   Content="000" 
+                   Grid.Column="0"
+                   FontSize="18" Foreground="#D9D9D9"
+                   FontFamily="arial" FontWeight="Bold"
+                   />
+            </Grid>
+
+            <DataGrid x:Name="DataGridEpm" 
+                  Style="{StaticResource CustomDataDridStyle}"
+                  Background="Transparent"
+                  Grid.Column="1"
+                  Width="auto" 
+                      SelectionChanged="DataGridEpm_SelectionChanged"
+                  Height="700" 
+                      Margin="80 0 80 0"
+                      HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  BorderThickness="0">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn  CanUserResize="False" Width="*" Header="Сотрудники" Binding="{Binding Lastname}"/>
+                    <DataGridTextColumn  CanUserResize="False" Width="*" Header="" Binding="{Binding Firstname}"/>
+                    <DataGridTextColumn  CanUserResize="False" Width="*" Header="" Binding="{Binding Middlename}"/>
+                    <DataGridTemplateColumn Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="InfoRowToolButton"
+                                    Click="InfoRowToolButton_Click"
+                                    Background="Transparent"
+                                    Style="{StaticResource DGRblue}"
+                                    Width="30" Height="30">
+                                    <Image 
+                                           Width="20" Height="20"
+                                    Source="\pages\elements\information.png">
+
+                                    </Image>
+                                </Button>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="EditRowToolButton"
+                                    Click="EditRowToolButton_Click"
+                                    Background="Transparent"
+                                    Style="{StaticResource DGRorange}"
+                                    Width="30" Height="30">
+                                    <Image 
+                                           Width="20" Height="20"
+                                    Source="\pages\elements\datarowedit.png">
+
+                                    </Image>
+                                </Button>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="40" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    x:Name="DeleteRowToolButton"
+                                    Click="DeleteRowToolButton_Click"
+                                    Background="Transparent"
+                                    Width="30" Height="30"
+                                        Style="{StaticResource DGRred}">
+                                    <Image Width="20" Height="20"
+                                     Source="\pages\elements\datarowdelete.png">
+
+                                    </Image>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Border Grid.Column="2" Grid.Row="1" Background="#393A41" Opacity="0.7"/>
+
+
+
+            <Grid x:Name="EmpDescription" Visibility="Hidden" Grid.Column="2" Background="#393A41">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="350"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="0" BorderThickness="0.8" BorderBrush="White" Grid.Column="1" Grid.Row="1" Background="#6A6B70" />
+                <Button 
+                Margin="0 0 0 0" 
+                Height="24" 
+                Width="35" 
+                Grid.Row="1" 
+                Grid.Column="1" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right" 
+                Panel.ZIndex="2"  
+                BorderThickness="0"
+                Background="Transparent"
+                x:Name="СloseDescriptionButton"
+                Click="СloseDescriptionButton_Click"
+                Style="{StaticResource CloseAppButton}">
+                    <StackPanel>
+                        <Image Source="\Theme\NewDark\WindowTools\closeApp.png" Margin="0 0 0 0" Width="11" Height="11">
+
+                        </Image>
+                    </StackPanel>
+                </Button>
+                <Image 
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="0 10 0 0"
+                    Width="120"
+                    Height="180"
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Source="/pages/elements/id-card.png">
+                </Image>
+                <Label x:Name="LastnameLabel"
+                         Style="{StaticResource DescLabelStyle}" 
+                       Grid.Column="1" 
+                       Content="Иванов"
+                       HorizontalAlignment="Left" 
+                       Grid.Row="1" 
+                       Width="248" 
+                       Margin="112,24,0,291"/>
+                
+                <Label x:Name="FirstnameLabel"
+                        Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Grid.Column="1" 
+                       HorizontalAlignment="Left"
+                       Content="Иван"
+                       Width="248" 
+                       Margin="112,59,0,257"/>
+
+                <Label x:Name="MiddlenameLabel"
+                         Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       HorizontalAlignment="Left"
+                       Content="Иванович" 
+                       Grid.Column="1" 
+                       Width="248" 
+                       Margin="112,93,0,218"/>
+
+                <Label x:Name="AgeLabel"
+                         Style="{StaticResource DescLabelStyle}" 
+                        Grid.Row="1" 
+                        HorizontalAlignment="Left"
+                        Content="Возраст: 25" Grid.Column="1" Width="173" Margin="99,146,0,64" Grid.RowSpan="2"/>
+
+                <Label x:Name="GenderLabel"
+                        Style="{StaticResource DescLabelStyle}" 
+                       Grid.Row="1" 
+                       HorizontalAlignment="Left"
+                       Content="Пол: М" 
+                       Grid.Column="1" 
+                       Width="146" 
+                       Margin="17,146,0,173"/>
+
+                <Label x:Name="PostCodeLabel"
+                       Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Margin="17,213,0,-128"
+                       HorizontalAlignment="Left"
+                       Content="Должность: Официант" 
+                       Grid.RowSpan="2" 
+                       Grid.Column="1"/>
+
+                <Label x:Name="AdressLabel"
+                         Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       Margin="17,247,0,-162"
+                       HorizontalAlignment="Left"
+                       Content="Адрес: Москва" 
+                       Grid.RowSpan="2" 
+                       Grid.Column="1"/>
+
+                <Label x:Name="PhoneLabel"
+                         Style="{StaticResource DescLabelStyle}" 
+                       Grid.Row="1" 
+                       Margin="17,283,0,-198"
+                       HorizontalAlignment="Left"
+                       Content="Телефон: 89508989872" 
+                       Grid.RowSpan="2" 
+                       Grid.Column="1"/>
+
+                <Label x:Name="PassportLabel"
+                         Style="{StaticResource DescLabelStyle}"
+                       Grid.Row="1" 
+                       HorizontalAlignment="Left"
+                       Content="Номер паспорта: 1234 567890" 
+                       Grid.Column="1" 
+                       Margin="17,177,0,137"/>
+
+            </Grid>
+
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="1"
+                        Name="AddRowDataGridStorage"
+                        Click="AddRowDataGridStorage_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Добавить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <Button Grid.Row="2"
+                        x:Name="DeleteRowDataGridStorage"
+                        Click="DeleteRowDataGridStorage_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Удалить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <Button Grid.Row="3"
+                        x:Name="UpdateDataGrid"
+                        Click="UpdateDataGrid_Click"
+                        Style="{StaticResource ToolButton}">
+                    <Label Content="Обновить" Style="{StaticResource ToolButtonLabel}"/>
+                </Button>
+                <TextBox
+                    Name="DataFilter"
+                    Padding="10 11 0 0" 
+                         Width="160" 
+                         Height="40" 
+                         HorizontalAlignment="Left" 
+                         Margin="20 0 0 0" 
+                         Style="{StaticResource TextBox2Style}">
+
+                </TextBox>
+                <Button
+                    Name="SearchDataGrid"
+                    Click="SearchDataGrid_Click"
+                    Style="{StaticResource DataGridSearch}"
+                    Height="40" HorizontalAlignment="Right" Width="40" Margin="0 0 30 0">
+                    <Image Width="20" Height="20"
+                                     Source="\Theme\Elements\search.png">
+
+                    </Image>
+                </Button>
+            </Grid>
+        </Grid>
+       
+        <!-- Кнопка возвращения в "Главное меню"  -->
+        <Button 
+            Panel.ZIndex="1"
+            Width="34" 
+            Height="24"
+            Grid.Row="1"
+            Background="Transparent"
+            Margin="20 0 0 0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left" 
+            Style="{StaticResource MenuRotateBackButton}"
+            x:Name="RotateMainMenuButton"
+            Click="RotateMainMenuButton_Click">
+            <Image Width="20" Height="20"
+                                     Source="\Theme\Elements\RotateIcon.png">
+
+            </Image>
+        </Button>
+       
+    </Grid>
+</Page>
